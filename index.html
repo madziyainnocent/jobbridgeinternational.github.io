@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="JobBridge International connects talent with global opportunities. Explore international recruitment opportunities and contact our placements team.">
+  <meta name="theme-color" content="#0b3d91">
+  <title>JobBridge International | Connecting Talent with Global Opportunities</title>
+  <style>
+    :root{--navy:#082b67;--blue:#0b55b5;--sky:#eaf3ff;--ink:#17243a;--muted:#5d6b80;--white:#fff;--line:#dce6f2;--shadow:0 18px 45px rgba(8,43,103,.12)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);line-height:1.6;background:#fff}
+    a{color:inherit;text-decoration:none}.container{width:min(1120px,92%);margin:auto}
+    header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+    .nav{min-height:78px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;color:var(--navy);letter-spacing:.2px}
+    .brand-mark{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#0b55b5,#082b67);color:#fff;font-size:20px;font-weight:800}
+    .brand small{display:block;font-size:10px;letter-spacing:1.2px;color:var(--muted);font-weight:700}
+    nav{display:flex;align-items:center;gap:26px;font-size:14px;font-weight:700;color:#34445d}
+    nav a:hover{color:var(--blue)}.nav-cta,.btn{display:inline-flex;align-items:center;justify-content:center;border-radius:8px;padding:12px 19px;background:var(--blue);color:#fff;font-weight:700;border:1px solid var(--blue);transition:.2s}
+    .nav-cta:hover,.btn:hover{background:var(--navy);border-color:var(--navy);transform:translateY(-1px)}
+    .menu-btn{display:none;border:1px solid var(--line);background:#fff;border-radius:8px;padding:9px 12px;font-size:20px}
+    .hero{background:linear-gradient(115deg,#082b67 0%,#0b55b5 65%,#2b79ce 100%);color:#fff;overflow:hidden}
+    .hero-inner{min-height:560px;display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:48px;padding-top:70px;padding-bottom:70px}
+    .eyebrow{font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:800;color:#bcd8ff}
+    h1{font-size:clamp(40px,5.5vw,66px);line-height:1.06;letter-spacing:-1.8px;margin:16px 0 22px}
+    .hero p{font-size:18px;color:#e5efff;max-width:620px;margin:0 0 30px}
+    .hero .btn{background:#fff;color:var(--navy);border-color:#fff}.hero .btn.secondary{background:transparent;color:#fff;border-color:rgba(255,255,255,.55);margin-left:10px}
+    .hero-art{position:relative;min-height:340px;display:grid;place-items:center}
+    .globe{width:min(330px,80vw);aspect-ratio:1;border-radius:50%;border:1px solid rgba(255,255,255,.45);background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.3),rgba(255,255,255,.06) 55%,rgba(255,255,255,.02));box-shadow:inset 0 0 45px rgba(255,255,255,.12),0 25px 70px rgba(0,0,0,.15);display:grid;place-items:center;font-size:100px}
+    .orbit{position:absolute;width:390px;height:140px;border:2px solid rgba(255,255,255,.35);border-radius:50%;transform:rotate(-25deg)}
+    .art-note{position:absolute;bottom:8px;right:0;background:#fff;color:var(--navy);padding:13px 18px;border-radius:10px;font-weight:800;box-shadow:var(--shadow)}
+    section{padding:82px 0}.section-head{max-width:700px;margin-bottom:38px}.section-head .eyebrow{color:var(--blue)}h2{font-size:clamp(30px,4vw,43px);line-height:1.15;letter-spacing:-.8px;margin:10px 0 14px;color:var(--navy)}.lead{font-size:17px;color:var(--muted);margin:0}
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}.about-panel{background:var(--sky);border-radius:18px;padding:34px}.about-panel strong{color:var(--navy)}
+    .feature-list{display:grid;gap:17px;margin-top:25px}.feature{display:flex;gap:14px;align-items:flex-start}.check{width:28px;height:28px;flex:0 0 28px;border-radius:50%;display:grid;place-items:center;background:#d5e8ff;color:var(--blue);font-weight:900}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.card{border:1px solid var(--line);border-radius:14px;padding:26px;background:#fff;box-shadow:0 8px 25px rgba(8,43,103,.04)}.card-icon{width:46px;height:46px;border-radius:12px;background:var(--sky);display:grid;place-items:center;color:var(--blue);font-size:22px}.card h3{color:var(--navy);margin:17px 0 8px}.card p{color:var(--muted);margin:0}
+    .opportunity{background:#f5f9ff}.job-card{display:flex;justify-content:space-between;align-items:center;gap:28px;padding:30px;border-radius:16px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow)}.job-tag{display:inline-block;padding:5px 10px;border-radius:20px;background:#e5f1ff;color:var(--blue);font-size:12px;font-weight:800}.job-card h3{font-size:24px;color:var(--navy);margin:12px 0 6px}.job-card p{margin:0;color:var(--muted)}
+    .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.step{border-top:3px solid var(--blue);padding:20px 16px 0 0}.step-number{font-size:13px;color:var(--blue);font-weight:900;letter-spacing:1px}.step h3{color:var(--navy);margin:8px 0}.step p{color:var(--muted);font-size:14px;margin:0}
+    .contact{background:var(--navy);color:#fff}.contact h2{color:#fff}.contact .lead{color:#d5e4fa}.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:42px}.contact-box{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:15px;padding:26px}.contact-row{margin:15px 0;color:#e6efff}.contact-row b{display:block;color:#fff;font-size:12px;text-transform:uppercase;letter-spacing:1px}.contact a:not(.btn){color:#fff;text-decoration:underline;text-underline-offset:3px}
+    footer{background:#061e49;color:#c6d7ef;padding:24px 0;font-size:13px}.footer-inner{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+    @media(max-width:800px){.hero-inner,.about-grid,.contact-grid{grid-template-columns:1fr}.hero-inner{padding-top:58px}.hero-art{min-height:270px}.globe{width:240px;font-size:76px}.orbit{width:290px;height:105px}.cards{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr 1fr}.job-card{align-items:flex-start;flex-direction:column}}
+    @media(max-width:620px){.menu-btn{display:block}nav{display:none;position:absolute;top:78px;left:0;right:0;background:#fff;padding:18px 4%;border-bottom:1px solid var(--line);flex-direction:column;align-items:flex-start;gap:16px}nav.open{display:flex}.nav-cta{display:none}.cards,.steps{grid-template-columns:1fr}section{padding:62px 0}.hero .btn.secondary{margin:12px 0 0}.hero-inner{min-height:auto}.footer-inner{flex-direction:column}}
+  </style>
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a class="brand" href="#home" aria-label="JobBridge International home"><span class="brand-mark">JB</span><span>JOBBRIDGE INTERNATIONAL<small>CONNECTING TALENT WITH GLOBAL OPPORTUNITIES</small></span></a>
+    <button class="menu-btn" id="menuBtn" aria-label="Open navigation" aria-expanded="false">☰</button>
+    <nav id="mainNav"><a href="#home">Home</a><a href="#about">About</a><a href="#services">Our Services</a><a href="#opportunities">Opportunities</a><a href="#process">How It Works</a><a href="#contact">Contact</a></nav>
+    <a class="nav-cta" href="#contact">Contact our team</a>
+  </div>
+</header>
+<main>
+  <section class="hero" id="home">
+    <div class="container hero-inner">
+      <div>
+        <div class="eyebrow">International recruitment • Global connections</div>
+        <h1>Connecting talent with global opportunities.</h1>
+        <p>JobBridge International helps connect candidates with employment opportunities beyond borders. We work to make the journey from application to international placement clear, organised and professional.</p>
+        <a class="btn" href="#opportunities">Explore opportunities</a>
+        <a class="btn secondary" href="#contact">Speak to our team</a>
+      </div>
+      <div class="hero-art" aria-hidden="true"><div class="orbit"></div><div class="globe">🌍</div><div class="art-note">Talent without borders</div></div>
+    </div>
+  </section>
+  <section id="about">
+    <div class="container about-grid">
+      <div>
+        <div class="section-head"><div class="eyebrow">Who we are</div><h2>Your bridge to international employment.</h2><p class="lead">JobBridge International is an overseas recruitment company focused on connecting talent from Africa with opportunities in international markets.</p></div>
+        <p>We believe candidates deserve clear information, respectful communication and a recruitment process they can understand. Our team supports candidates with opportunity information, application guidance and placement coordination.</p>
+      </div>
+      <div class="about-panel">
+        <strong>Our commitment</strong>
+        <div class="feature-list">
+          <div class="feature"><span class="check">✓</span><div><b>Clear communication</b><br><span>Understand the role, requirements and next steps.</span></div></div>
+          <div class="feature"><span class="check">✓</span><div><b>Professional guidance</b><br><span>Practical support throughout the recruitment process.</span></div></div>
+          <div class="feature"><span class="check">✓</span><div><b>International connections</b><br><span>Connecting candidates with opportunities across borders.</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="services" style="background:#f5f9ff">
+    <div class="container">
+      <div class="section-head"><div class="eyebrow">What we do</div><h2>Recruitment support at every step.</h2><p class="lead">We help candidates and employers navigate international recruitment with a structured, people-focused approach.</p></div>
+      <div class="cards">
+        <article class="card"><div class="card-icon">⌕</div><h3>Candidate sourcing</h3><p>Identifying and connecting suitable candidates with roles that match their experience and qualifications.</p></article>
+        <article class="card"><div class="card-icon">▤</div><h3>Application guidance</h3><p>Helping applicants understand role requirements and prepare the information needed for consideration.</p></article>
+        <article class="card"><div class="card-icon">✈</div><h3>Placement coordination</h3><p>Supporting communication and coordination as candidates progress through recruitment and placement stages.</p></article>
+      </div>
+    </div>
+  </section>
+  <section class="opportunity" id="opportunities">
+    <div class="container">
+      <div class="section-head"><div class="eyebrow">Career opportunities</div><h2>Take the next step in your career.</h2><p class="lead">Our recruitment team can provide information about current vacancies, eligibility criteria and application procedures.</p></div>
+      <div class="job-card"><div><span class="job-tag">Enquiries welcome</span><h3>International employment opportunities</h3><p>Ask our placements team about current roles, including professional driving opportunities in Lithuania, and the requirements for each vacancy.</p></div><a class="btn" href="mailto:placements@jobbridgeinternational.online?subject=Employment%20opportunities%20enquiry">Enquire about vacancies</a></div>
+    </div>
+  </section>
+  <section id="process">
+    <div class="container">
+      <div class="section-head"><div class="eyebrow">How it works</div><h2>A clear path from enquiry to application.</h2><p class="lead">The exact steps depend on the vacancy and the employer's requirements.</p></div>
+      <div class="steps">
+        <div class="step"><div class="step-number">STEP 01</div><h3>Make an enquiry</h3><p>Contact us to learn about available opportunities and basic eligibility requirements.</p></div>
+        <div class="step"><div class="step-number">STEP 02</div><h3>Submit details</h3><p>Complete the relevant application and provide accurate supporting information.</p></div>
+        <div class="step"><div class="step-number">STEP 03</div><h3>Assessment</h3><p>Your application may be reviewed against the role and employer's selection criteria.</p></div>
+        <div class="step"><div class="step-number">STEP 04</div><h3>Next steps</h3><p>Shortlisted candidates receive further guidance on interviews, documentation and placement steps.</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="contact" id="contact">
+    <div class="container contact-grid">
+      <div><div class="eyebrow">Get in touch</div><h2>Let's connect.</h2><p class="lead">Contact JobBridge International for recruitment enquiries, candidate support or information about current opportunities.</p><p style="margin-top:28px"><a class="btn" style="background:#fff;color:#082b67;border-color:#fff" href="https://wa.me/447521198722" target="_blank" rel="noopener">Chat on WhatsApp</a></p></div>
+      <div class="contact-box">
+        <div class="contact-row"><b>Email</b><a href="mailto:placements@jobbridgeinternational.online">placements@jobbridgeinternational.online</a></div>
+        <div class="contact-row"><b>WhatsApp</b><a href="https://wa.me/447521198722" target="_blank" rel="noopener">+44 7521 198722</a></div>
+        <div class="contact-row"><b>Address</b>Didžioji 18, Vilnius LT-01128, Lietuva</div>
+        <div class="contact-row"><b>Website</b>jobbridgeinternational.online</div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer><div class="container footer-inner"><span>© <span id="year"></span> JobBridge International. All rights reserved.</span><span>Connecting Talent with Global Opportunities.</span></div></footer>
+<script>
+  const menuBtn=document.getElementById('menuBtn');
+  const nav=document.getElementById('mainNav');
+  menuBtn.addEventListener('click',()=>{const open=nav.classList.toggle('open');menuBtn.setAttribute('aria-expanded',String(open));});
+  nav.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{nav.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');}));
+  document.getElementById('year').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
