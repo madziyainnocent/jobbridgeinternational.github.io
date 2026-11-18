@@ -84,3 +84,22 @@ Next frontend work:
 - Do not treat AI output as a hiring decision. Recruiters make all selection decisions.
 
 This is an implementation foundation, not a live production recruitment system until the external accounts, secrets, storage policies, frontend and end-to-end tests are completed.
+
+## 6. Enable the first recruitment administrator
+
+The website now contains a role-protected recruitment dashboard. It appears only when the signed-in user's `profiles.role` is `admin` or `recruiter`.
+
+1. First create and verify your own candidate account through the website.
+2. In Supabase SQL Editor, run the following after replacing the email with the exact email used for that account:
+
+```sql
+update public.profiles
+set role = 'admin', updated_at = now()
+where email = 'YOUR-LOGIN-EMAIL';
+```
+
+3. Confirm exactly one profile row was updated. If zero rows were updated, verify the account exists and has completed registration.
+4. Sign out of the website and sign in again. The admin dashboard should then appear.
+5. Do not grant administrator access to candidates or untrusted staff. Never add role editing to the public candidate profile form.
+
+The dashboard currently supports vacancy creation/publication, application review, status changes and candidate-visible status-event notes. CV file upload/download workflows, richer applicant filters, staff invitation controls and full audit reporting remain subsequent implementation tasks.
