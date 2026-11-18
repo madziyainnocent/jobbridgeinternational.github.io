@@ -1,0 +1,15 @@
+name = "jobbridge-api"
+main = "src/index.js"
+compatibility_date = "2026-11-18"
+
+[vars]
+ALLOWED_ORIGIN = "https://jobbridgeinternational.online"
+OPENAI_MODEL = "gpt-6-mini"
+META_GRAPH_VERSION = "v23.0"
+
+# Add secret values in Cloudflare dashboard or with:
+# npx wrangler secret put OPENAI_API_KEY
+# npx wrangler secret put WHATSAPP_TOKEN
+# npx wrangler secret put WHATSAPP_VERIFY_TOKEN
+# npx wrangler secret put META_APP_SECRET
+# npx wrangler secret put WHATSAPP_PHONE_NUMBER_ID
