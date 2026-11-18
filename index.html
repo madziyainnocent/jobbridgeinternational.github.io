@@ -13,7 +13,7 @@
     header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
     .nav{min-height:78px;display:flex;align-items:center;justify-content:space-between;gap:24px}
     .brand{display:flex;align-items:center;gap:12px;font-weight:800;color:var(--navy);letter-spacing:.2px}
-    .brand-mark{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#0b55b5,#082b67);color:#fff;font-size:20px;font-weight:800}
+    .brand-logo{display:block;width:270px;max-width:54vw;height:auto}
     .brand small{display:block;font-size:10px;letter-spacing:1.2px;color:var(--muted);font-weight:700}
     nav{display:flex;align-items:center;gap:26px;font-size:14px;font-weight:700;color:#34445d}
     nav a:hover{color:var(--blue)}.nav-cta,.btn{display:inline-flex;align-items:center;justify-content:center;border-radius:8px;padding:12px 19px;background:var(--blue);color:#fff;font-weight:700;border:1px solid var(--blue);transition:.2s}
@@ -44,7 +44,7 @@
 <body>
 <header>
   <div class="container nav">
-    <a class="brand" href="#home" aria-label="JobBridge International home"><span class="brand-mark">JB</span><span>JOBBRIDGE INTERNATIONAL<small>CONNECTING TALENT WITH GLOBAL OPPORTUNITIES</small></span></a>
+    <a class="brand" href="#home" aria-label="JobBridge International home"><img class="brand-logo" src="/assets/jobbridge-logo-set-2.svg" alt="JobBridge International — Connecting Talent with Global Opportunities"></a>
     <button class="menu-btn" id="menuBtn" aria-label="Open navigation" aria-expanded="false">☰</button>
     <nav id="mainNav"><a href="#home">Home</a><a href="#about">About</a><a href="#services">Our Services</a><a href="#opportunities">Opportunities</a><a href="#process">How It Works</a><a href="#contact">Contact</a></nav>
     <a class="nav-cta" href="#contact">Contact our team</a>
