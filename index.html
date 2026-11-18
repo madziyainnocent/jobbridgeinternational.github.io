@@ -216,7 +216,7 @@
   document.addEventListener('click',event=>{if(!nav.contains(event.target)){nav.querySelectorAll('.nav-group').forEach(group=>{group.classList.remove('expanded');const button=group.querySelector('.nav-drop-toggle');if(button)button.setAttribute('aria-expanded','false');});}});
   document.getElementById('year').textContent=new Date().getFullYear();
 
-  const CHAT_API_URL='https://api.jobbridgeinternational.online/api/chat';
+  const CHAT_API_URL='https://jobbridge-api.madziyainnocent.workers.dev/api/chat';
   const chatPanel=document.getElementById('chatPanel');
   document.getElementById('chatLauncher').addEventListener('click',()=>{
     chatPanel.hidden=!chatPanel.hidden;
