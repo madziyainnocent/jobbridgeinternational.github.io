@@ -81,7 +81,13 @@
           <label for="authEmail">Email address</label><input id="authEmail" type="email" autocomplete="email" placeholder="you@example.com" required>
           <label for="authPassword">Password</label><input id="authPassword" type="password" autocomplete="current-password" minlength="8" placeholder="At least 8 characters" required>
           <button class="btn" id="authSubmit" type="submit">Sign in</button>
+          <button class="btn btn-outline" id="forgotPasswordBtn" type="button" style="margin-top:8px">Forgot password?</button>
           <p class="portal-message" id="authMessage" role="status" aria-live="polite"></p>
+          <div id="recoveryPanel" hidden>
+            <label for="newPassword">New password</label><input id="newPassword" type="password" minlength="8" autocomplete="new-password" placeholder="At least 8 characters">
+            <button class="btn" id="saveNewPasswordBtn" type="button">Save new password</button>
+            <p class="portal-message" id="recoveryMessage" role="status" aria-live="polite"></p>
+          </div>
         </form>
       </div>
       <div class="portal-card portal-info">
@@ -265,8 +271,31 @@
     document.getElementById('nameLabel').hidden=!signup;document.getElementById('phoneLabel').hidden=!signup;
     authName.required=signup;authSubmit.textContent=signup?'Create account':'Sign in';
     document.getElementById('authPassword').autocomplete=signup?'new-password':'current-password';
+    document.getElementById('forgotPasswordBtn').hidden=signup;
     authMessage.textContent='';
   }
+  document.getElementById('forgotPasswordBtn').addEventListener('click',async()=>{
+    const email=document.getElementById('authEmail').value.trim();
+    if(!email){authMessage.textContent='Enter your email address first, then select Forgot password?';document.getElementById('authEmail').focus();return;}
+    const button=document.getElementById('forgotPasswordBtn');button.disabled=true;authMessage.textContent='Sending password reset email…';
+    try{
+      const {error}=await supabaseClient.auth.resetPasswordForEmail(email,{redirectTo:'https://jobbridgeinternational.online/'});
+      if(error)throw error;
+      authMessage.textContent='If an account exists for this address, a password reset email has been sent. Check your inbox and spam folder.';
+    }catch(error){authMessage.textContent='Could not send reset email: '+(error.message||'Please try again.');}
+    finally{button.disabled=false;}
+  });
+  document.getElementById('saveNewPasswordBtn').addEventListener('click',async()=>{
+    const password=document.getElementById('newPassword').value;
+    const message=document.getElementById('recoveryMessage');
+    if(password.length<8){message.textContent='Use a password with at least 8 characters.';return;}
+    message.textContent='Updating password…';
+    const {error}=await supabaseClient.auth.updateUser({password});
+    if(error){message.textContent='Could not update password: '+error.message;return;}
+    message.textContent='Password updated. You can now continue to your account.';
+    document.getElementById('recoveryPanel').hidden=true;
+    document.getElementById('authMessage').textContent='Password updated successfully. Sign in with your new password.';
+  });
   document.getElementById('loginTab').addEventListener('click',()=>setAuthMode('login'));
   document.getElementById('signupTab').addEventListener('click',()=>setAuthMode('signup'));
   authForm.addEventListener('submit',async event=>{
@@ -452,7 +481,12 @@
   });
 
   supabaseClient.auth.onAuthStateChange((event,session)=>{
-    if(session?.user){setTimeout(()=>loadCandidateDashboard(session.user),0);}
+    if(event==='PASSWORD_RECOVERY'){
+      document.getElementById('authCard').hidden=false;
+      document.getElementById('candidateDashboard').hidden=true;
+      document.getElementById('recoveryPanel').hidden=false;
+      document.getElementById('recoveryMessage').textContent='Choose a new password for your account.';
+    }else if(session?.user){setTimeout(()=>loadCandidateDashboard(session.user),0);}
     else{currentUser=null;document.getElementById('candidateDashboard').hidden=true;document.getElementById('authCard').hidden=false;}
   });
   supabaseClient.auth.getSession().then(({data})=>{if(data.session?.user)loadCandidateDashboard(data.session.user);});
