@@ -31,7 +31,7 @@ Do not claim an application is approved or selected unless an authenticated recr
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      model: env.OPENAI_MODEL || "gpt-6-mini",
+      model: env.OPENAI_MODEL || "gpt-5.4-mini",
       instructions,
       input: message,
       max_output_tokens: 450
