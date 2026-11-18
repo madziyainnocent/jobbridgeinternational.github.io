@@ -319,7 +319,7 @@
     if(error){host.textContent='Could not load applications: '+error.message;return;}
     if(!data?.length){host.innerHTML='<p>You have not submitted any applications yet.</p>';return;}
     host.replaceChildren();
-    data.forEach(app=>{
+    for (const app of data) {
       const row=document.createElement('div');row.className='application-row';
       const details=document.createElement('div');const title=document.createElement('strong');
       title.textContent=app.vacancies?.title||'Vacancy application';
@@ -331,7 +331,7 @@
       if(events.data?.length){const timeline=document.createElement('div');timeline.className='portal-small';timeline.textContent='Updates: '+events.data.map(e=>e.new_status.replaceAll('_',' ')+(e.note?' — '+e.note:'')).join(' · ');host.appendChild(timeline);}
       const docs=await supabaseClient.from('candidate_documents').select('original_filename,uploaded_at').eq('application_id',app.id).order('uploaded_at',{ascending:false});
       if(docs.data?.length){const uploaded=document.createElement('div');uploaded.className='portal-small';uploaded.textContent='Documents submitted: '+docs.data.map(d=>d.original_filename).join(', ');host.appendChild(uploaded);}
-    });
+    }
   }
   document.getElementById('profileForm').addEventListener('submit',async event=>{
     event.preventDefault();const msg=document.getElementById('profileMessage');msg.textContent='Saving…';
