@@ -34,6 +34,9 @@
 
     .admin-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:18px 0 22px}.admin-stat{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px}.admin-stat strong{display:block;font-size:28px;color:var(--navy)}.admin-stat span{font-size:12px;color:var(--muted)}.admin-grid{grid-template-columns:.85fr 1.15fr}.admin-check{display:flex;align-items:center;gap:9px}.admin-check input{width:auto}.admin-filter{margin-bottom:15px}.admin-application{border-top:1px solid var(--line);padding:15px 0}.admin-application h4{margin:0;color:var(--navy)}.admin-application p{margin:3px 0;color:var(--muted);font-size:13px}.admin-controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:9px}.admin-controls select{max-width:210px}.admin-controls input{max-width:220px}.admin-controls button{cursor:pointer}.admin-note{font-size:12px;color:var(--muted);margin-top:7px}
 
+
+    .chat-widget{position:fixed;right:20px;bottom:20px;z-index:80;font-family:Arial,Helvetica,sans-serif}.chat-launcher{border:0;border-radius:28px;background:var(--blue);color:#fff;padding:14px 20px;font-weight:800;box-shadow:0 8px 30px rgba(8,43,103,.25);cursor:pointer}.chat-panel{width:min(360px,calc(100vw - 28px));height:460px;max-height:calc(100vh - 100px);background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 18px 55px rgba(8,43,103,.22);display:flex;flex-direction:column;overflow:hidden;margin-bottom:12px}.chat-panel[hidden]{display:none}.chat-head{background:var(--navy);color:#fff;padding:15px;display:flex;justify-content:space-between;align-items:center}.chat-head small{display:block;color:#d5e4fa;font-size:11px;margin-top:3px}.chat-head button{background:transparent;color:#fff;border:0;font-size:25px;cursor:pointer}.chat-messages{padding:14px;overflow:auto;flex:1;background:#f5f9ff}.chat-bubble{max-width:90%;padding:10px 12px;border-radius:12px;font-size:13px;white-space:pre-wrap}.chat-bubble.bot{background:#fff;border:1px solid var(--line);color:var(--ink)}.chat-bubble.user{background:#dcecff;color:var(--navy);margin-left:auto}.chat-compose{padding:10px;display:flex;gap:7px;border-top:1px solid var(--line)}.chat-compose input{min-width:0;flex:1;padding:11px;border:1px solid var(--line);border-radius:8px}.chat-compose button{background:var(--blue);color:#fff;border:0;border-radius:8px;padding:0 14px;font-weight:700}.chat-disclaimer{font-size:10px;color:var(--muted);padding:0 12px 10px;margin:0}
+
     @media(max-width:900px){nav{gap:12px;font-size:12px}.nav-cta{display:none}.hero-grid{grid-template-columns:1fr  .7fr;gap:20px}.driver-details{grid-template-columns:1fr}.cards{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr 1fr}}
     @media(max-width:680px){.admin-stats{grid-template-columns:1fr 1fr}.admin-grid{grid-template-columns:1fr}.menu-btn{display:block}nav{display:none;position:absolute;top:81px;left:0;right:0;background:#fff;padding:18px 4%;border-bottom:1px solid var(--line);flex-direction:column;align-items:flex-start;gap:16px;font-size:14px}nav.open{display:flex}.hero{padding:64px 0}.hero-grid,.about-grid,.contact-grid{grid-template-columns:1fr}.hero-mark{min-height:240px}.globe{width:220px;font-size:72px}.orbit{width:270px;height:100px}.hero-note{right:0}.trust-grid{grid-template-columns:1fr;gap:10px}.trust-item{justify-content:flex-start}.cards,.steps,.faq-list{grid-template-columns:1fr}section{padding:60px 0}.footer-inner{flex-direction:column}
       nav .nav-group{display:block;width:100%}.nav-drop-toggle{width:100%;justify-content:space-between;padding:7px 0;font-size:14px}
@@ -183,6 +186,17 @@
   </div></section>
 </main>
 <footer><div class="container footer-inner"><span>© <span id="year"></span> JobBridge International. All rights reserved.</span><span>Connecting Talent with Global Opportunities.</span><a class="footer-facebook" href="https://www.facebook.com/Jobinternational1/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.5 21v-8h2.7l.4-3.1h-3.1v-2c0-.9.3-1.5 1.6-1.5h1.7V3.6c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.1H7.3V13h2.8v8h3.4z"/></svg>Follow us on Facebook</a></div></footer>
+
+  <aside class="chat-widget" id="jobbridgeChat" aria-label="JobBridge recruitment assistant">
+    <button class="chat-launcher" id="chatLauncher" type="button" aria-expanded="false"><span>💬</span> Ask JobBridge</button>
+    <section class="chat-panel" id="chatPanel" hidden aria-label="Recruitment assistant chat">
+      <div class="chat-head"><div><strong>JobBridge Assistant</strong><small>Recruitment information and application guidance</small></div><button id="chatClose" type="button" aria-label="Close chat">×</button></div>
+      <div class="chat-messages" id="chatMessages" aria-live="polite"><p class="chat-bubble bot">Hello! I can help with vacancy information, application requirements and recruitment questions. What would you like to know?</p></div>
+      <form class="chat-compose" id="chatForm"><input id="chatInput" maxlength="2000" placeholder="Type your question…" required aria-label="Your question"><button type="submit">Send</button></form>
+      <p class="chat-disclaimer">Please do not share passwords, passport numbers or private documents here. For personal application status, sign in to your candidate account.</p>
+    </section>
+  </aside>
+
 <script>
   const menuBtn=document.getElementById('menuBtn');
   const nav=document.getElementById('mainNav');
@@ -201,6 +215,38 @@
   }));
   document.addEventListener('click',event=>{if(!nav.contains(event.target)){nav.querySelectorAll('.nav-group').forEach(group=>{group.classList.remove('expanded');const button=group.querySelector('.nav-drop-toggle');if(button)button.setAttribute('aria-expanded','false');});}});
   document.getElementById('year').textContent=new Date().getFullYear();
+
+  const CHAT_API_URL='https://api.jobbridgeinternational.online/api/chat';
+  const chatPanel=document.getElementById('chatPanel');
+  document.getElementById('chatLauncher').addEventListener('click',()=>{
+    chatPanel.hidden=!chatPanel.hidden;
+    document.getElementById('chatLauncher').setAttribute('aria-expanded',String(!chatPanel.hidden));
+  });
+  document.getElementById('chatClose').addEventListener('click',()=>{
+    chatPanel.hidden=true;document.getElementById('chatLauncher').setAttribute('aria-expanded','false');
+  });
+  function addChatMessage(text,who){
+    const node=document.createElement('p');node.className='chat-bubble '+who;node.textContent=text;
+    document.getElementById('chatMessages').appendChild(node);
+    document.getElementById('chatMessages').scrollTop=document.getElementById('chatMessages').scrollHeight;
+    return node;
+  }
+  document.getElementById('chatForm').addEventListener('submit',async event=>{
+    event.preventDefault();const input=document.getElementById('chatInput');
+    const message=input.value.trim();if(!message)return;
+    addChatMessage(message,'user');input.value='';
+    const pending=addChatMessage('Thinking…','bot');
+    const send=document.querySelector('#chatForm button');send.disabled=true;
+    try{
+      const response=await fetch(CHAT_API_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message})});
+      const result=await response.json();
+      if(!response.ok)throw new Error(result.error||'Assistant unavailable');
+      pending.textContent=result.answer||'Please email placements@jobbridgeinternational.online for assistance.';
+    }catch(error){
+      pending.textContent='Our AI assistant is being configured. Please contact placements@jobbridgeinternational.online for recruitment enquiries.';
+    }finally{send.disabled=false;}
+  });
+
 
   // Supabase browser client: publishable key is intended for public browser use.
   const SUPABASE_URL = 'https://pdtpkhxxsuiyoxsnbslc.supabase.co';
