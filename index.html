@@ -31,8 +31,11 @@
 
     .portal-section{background:#f5f9ff}.portal-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}.portal-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:25px;box-shadow:0 8px 25px rgba(8,43,103,.035)}.portal-card h3{color:var(--navy);margin:0 0 14px}.portal-card form{display:grid;gap:9px}.portal-card label{font-size:13px;font-weight:700;color:var(--navy);margin-top:5px}.portal-card input,.portal-card select,.portal-card textarea{width:100%;border:1px solid #cbd8e8;border-radius:7px;padding:12px;font:inherit;color:var(--ink);background:#fff}.portal-card .btn{margin-top:8px;cursor:pointer}.portal-tabs{display:flex;gap:8px;margin-bottom:18px;border-bottom:1px solid var(--line)}.portal-tab{border:0;background:transparent;padding:10px 14px;color:var(--muted);font-weight:700;cursor:pointer}.portal-tab.active{color:var(--blue);border-bottom:3px solid var(--blue)}.portal-message{font-size:13px;color:var(--blue);min-height:20px;margin:6px 0 0}.portal-info p,.portal-info li{color:var(--muted)}.portal-info ul{padding-left:20px}.portal-small{font-size:12px;color:var(--muted)}.portal-dashboard{margin-top:30px}.dashboard-heading{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:20px}.dashboard-heading h3{font-size:27px;color:var(--navy);margin:3px 0}.dashboard-heading p{margin:0;color:var(--muted)}.btn-outline{background:#fff;color:var(--navy);border-color:var(--line)}.application-list{margin-top:20px;overflow-x:auto}.application-row{padding:15px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}.application-row:last-child{border-bottom:0}.status-pill{display:inline-block;background:#e5f1ff;color:var(--navy);border-radius:20px;padding:4px 10px;font-size:12px;font-weight:700}.portal-section [hidden]{display:none!important}
 
+
+    .admin-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:18px 0 22px}.admin-stat{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px}.admin-stat strong{display:block;font-size:28px;color:var(--navy)}.admin-stat span{font-size:12px;color:var(--muted)}.admin-grid{grid-template-columns:.85fr 1.15fr}.admin-check{display:flex;align-items:center;gap:9px}.admin-check input{width:auto}.admin-filter{margin-bottom:15px}.admin-application{border-top:1px solid var(--line);padding:15px 0}.admin-application h4{margin:0;color:var(--navy)}.admin-application p{margin:3px 0;color:var(--muted);font-size:13px}.admin-controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:9px}.admin-controls select{max-width:210px}.admin-controls input{max-width:220px}.admin-controls button{cursor:pointer}.admin-note{font-size:12px;color:var(--muted);margin-top:7px}
+
     @media(max-width:900px){nav{gap:12px;font-size:12px}.nav-cta{display:none}.hero-grid{grid-template-columns:1fr  .7fr;gap:20px}.driver-details{grid-template-columns:1fr}.cards{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr 1fr}}
-    @media(max-width:680px){.menu-btn{display:block}nav{display:none;position:absolute;top:81px;left:0;right:0;background:#fff;padding:18px 4%;border-bottom:1px solid var(--line);flex-direction:column;align-items:flex-start;gap:16px;font-size:14px}nav.open{display:flex}.hero{padding:64px 0}.hero-grid,.about-grid,.contact-grid{grid-template-columns:1fr}.hero-mark{min-height:240px}.globe{width:220px;font-size:72px}.orbit{width:270px;height:100px}.hero-note{right:0}.trust-grid{grid-template-columns:1fr;gap:10px}.trust-item{justify-content:flex-start}.cards,.steps,.faq-list{grid-template-columns:1fr}section{padding:60px 0}.footer-inner{flex-direction:column}
+    @media(max-width:680px){.admin-stats{grid-template-columns:1fr 1fr}.admin-grid{grid-template-columns:1fr}.menu-btn{display:block}nav{display:none;position:absolute;top:81px;left:0;right:0;background:#fff;padding:18px 4%;border-bottom:1px solid var(--line);flex-direction:column;align-items:flex-start;gap:16px;font-size:14px}nav.open{display:flex}.hero{padding:64px 0}.hero-grid,.about-grid,.contact-grid{grid-template-columns:1fr}.hero-mark{min-height:240px}.globe{width:220px;font-size:72px}.orbit{width:270px;height:100px}.hero-note{right:0}.trust-grid{grid-template-columns:1fr;gap:10px}.trust-item{justify-content:flex-start}.cards,.steps,.faq-list{grid-template-columns:1fr}section{padding:60px 0}.footer-inner{flex-direction:column}
       nav .nav-group{display:block;width:100%}.nav-drop-toggle{width:100%;justify-content:space-between;padding:7px 0;font-size:14px}
       .dropdown{position:static;min-width:0;width:100%;box-shadow:none;border:0;border-left:2px solid var(--line);border-radius:0;margin:3px 0 8px 5px;padding:3px 0 3px 10px}
       .dropdown a{white-space:normal;padding:9px 10px}
@@ -100,6 +103,26 @@
         </form><p class="portal-small">Only submit accurate information. Selection and placement are not guaranteed.</p></div>
       </div>
       <div class="portal-card application-list"><h3>My applications</h3><div id="applicationsList"><p>Sign in to view your applications.</p></div></div>
+
+    <div class="portal-dashboard" id="adminDashboard" hidden>
+      <div class="dashboard-heading"><div><div class="eyebrow">Recruitment administration</div><h3>Admin dashboard</h3><p>Manage vacancies and review candidate applications.</p></div><span class="status-pill">Staff access</span></div>
+      <div class="admin-stats" id="adminStats"><div class="admin-stat"><strong id="statApplications">—</strong><span>Total applications</span></div><div class="admin-stat"><strong id="statReview">—</strong><span>Under review</span></div><div class="admin-stat"><strong id="statVacancies">—</strong><span>Published vacancies</span></div><div class="admin-stat"><strong id="statCandidates">—</strong><span>Candidate accounts</span></div></div>
+      <div class="portal-grid admin-grid">
+        <div class="portal-card"><h3>Publish a vacancy</h3><form id="adminVacancyForm">
+          <label for="adminVacancyTitle">Job title</label><input id="adminVacancyTitle" required>
+          <label for="adminVacancyCountry">Destination country</label><input id="adminVacancyCountry" required>
+          <label for="adminVacancyLocation">Location</label><input id="adminVacancyLocation">
+          <label for="adminVacancyEmployer">Employer (optional)</label><input id="adminVacancyEmployer">
+          <label for="adminVacancyType">Employment type</label><input id="adminVacancyType" placeholder="Full-time">
+          <label for="adminVacancyDescription">Job description</label><textarea id="adminVacancyDescription" rows="4" required></textarea>
+          <label for="adminVacancyRequirements">Requirements (one per line)</label><textarea id="adminVacancyRequirements" rows="4"></textarea>
+          <label for="adminVacancyClosing">Closing date (optional)</label><input id="adminVacancyClosing" type="date">
+          <label class="admin-check"><input id="adminVacancyPublished" type="checkbox"> Publish immediately</label>
+          <button class="btn" type="submit">Save vacancy</button><p class="portal-message" id="adminVacancyMessage" role="status"></p>
+        </form></div>
+        <div class="portal-card"><h3>Recruitment applications</h3><div class="admin-filter"><label for="adminStatusFilter">Filter by status</label><select id="adminStatusFilter"><option value="">All statuses</option><option value="received">Received</option><option value="under_review">Under review</option><option value="shortlisted">Shortlisted</option><option value="interview_scheduled">Interview scheduled</option><option value="selected">Selected</option><option value="documentation">Documentation</option><option value="work_permit">Work permit</option><option value="placed">Placed</option><option value="rejected">Rejected</option><option value="withdrawn">Withdrawn</option></select></div><div id="adminApplications"><p>Loading applications…</p></div></div>
+      </div>
+    </div>
     </div>
   </div></section>
 
@@ -229,7 +252,10 @@
     document.getElementById('profilePhone').value=profile?.phone||user.user_metadata?.phone||'';
     document.getElementById('profileNationality').value=profile?.nationality||'';
     document.getElementById('profileResidence').value=profile?.country_of_residence||'';
-    await loadVacancies();await loadApplications();
+    const isStaff=profile?.role==='admin'||profile?.role==='recruiter';
+    document.getElementById('candidateDashboard').hidden=isStaff;
+    document.getElementById('adminDashboard').hidden=!isStaff;
+    if(isStaff){await loadAdminDashboard();}else{await loadVacancies();await loadApplications();}
   }
   async function loadVacancies(){
     const select=document.getElementById('vacancySelect');
@@ -274,6 +300,63 @@
   document.getElementById('signOutBtn').addEventListener('click',async()=>{
     await supabaseClient.auth.signOut();document.getElementById('candidateDashboard').hidden=true;document.getElementById('authCard').hidden=false;currentUser=null;
   });
+
+  const applicationStatuses=['received','under_review','shortlisted','interview_scheduled','selected','documentation','work_permit','placed','rejected','withdrawn'];
+  async function loadAdminDashboard(){
+    const [apps,vacancies,profiles]=await Promise.all([
+      supabaseClient.from('applications').select('id,status,reference_code,submitted_at,cover_note,profiles(full_name,email,phone),vacancies(title,destination_country)').order('submitted_at',{ascending:false}),
+      supabaseClient.from('vacancies').select('id',{count:'exact',head:true}).eq('is_published',true),
+      supabaseClient.from('profiles').select('id',{count:'exact',head:true}).eq('role','candidate')
+    ]);
+    if(apps.error){document.getElementById('adminApplications').textContent='Unable to load applications: '+apps.error.message;return;}
+    const records=apps.data||[];
+    document.getElementById('statApplications').textContent=records.length;
+    document.getElementById('statReview').textContent=records.filter(a=>a.status==='under_review').length;
+    document.getElementById('statVacancies').textContent=vacancies.count??'—';
+    document.getElementById('statCandidates').textContent=profiles.count??'—';
+    renderAdminApplications(records);
+  }
+  function renderAdminApplications(records){
+    const host=document.getElementById('adminApplications');host.replaceChildren();
+    const filter=document.getElementById('adminStatusFilter').value;
+    const visible=filter?records.filter(a=>a.status===filter):records;
+    if(!visible.length){host.textContent='No applications found for this filter.';return;}
+    visible.forEach(app=>{
+      const card=document.createElement('article');card.className='admin-application';
+      const heading=document.createElement('h4');heading.textContent=app.profiles?.full_name||'Candidate';
+      const meta=document.createElement('p');meta.textContent=(app.vacancies?.title||'Vacancy')+' · '+(app.vacancies?.destination_country||'')+' · '+(app.profiles?.email||'');
+      const reference=document.createElement('p');reference.textContent='Reference: '+app.reference_code+' · Submitted: '+new Date(app.submitted_at).toLocaleDateString();
+      const phone=document.createElement('p');phone.textContent=app.profiles?.phone||'No phone number provided';
+      const note=document.createElement('p');note.textContent=app.cover_note||'No candidate introduction supplied';
+      const controls=document.createElement('div');controls.className='admin-controls';
+      const select=document.createElement('select');select.setAttribute('aria-label','Application status');
+      applicationStatuses.forEach(status=>{const option=document.createElement('option');option.value=status;option.textContent=status.replaceAll('_',' ');option.selected=status===app.status;select.appendChild(option);});
+      const noteInput=document.createElement('input');noteInput.placeholder='Optional update for candidate';noteInput.setAttribute('aria-label','Status update note');
+      const save=document.createElement('button');save.type='button';save.className='btn';save.textContent='Update status';
+      const feedback=document.createElement('span');feedback.className='admin-note';feedback.setAttribute('role','status');
+      save.addEventListener('click',async()=>{
+        save.disabled=true;feedback.textContent='Saving…';
+        const next=select.value;
+        const {error:updateError}=await supabaseClient.from('applications').update({status:next,updated_at:new Date().toISOString()}).eq('id',app.id);
+        if(updateError){feedback.textContent='Update failed: '+updateError.message;save.disabled=false;return;}
+        const {error:eventError}=await supabaseClient.from('application_events').insert({application_id:app.id,old_status:app.status,new_status:next,note:noteInput.value.trim()||null,visible_to_candidate:true,changed_by:currentUser.id});
+        if(eventError){feedback.textContent='Status saved, but timeline note failed: '+eventError.message;}else{feedback.textContent='Status updated.';}
+        app.status=next;await loadAdminDashboard();
+      });
+      controls.append(select,noteInput,save);card.append(heading,meta,reference,phone,note,controls,feedback);host.appendChild(card);
+    });
+  }
+  document.getElementById('adminStatusFilter').addEventListener('change',()=>loadAdminDashboard());
+  document.getElementById('adminVacancyForm').addEventListener('submit',async event=>{
+    event.preventDefault();const msg=document.getElementById('adminVacancyMessage');msg.textContent='Saving vacancy…';
+    const title=document.getElementById('adminVacancyTitle').value.trim();
+    const requirements=document.getElementById('adminVacancyRequirements').value.split('\n').map(x=>x.trim()).filter(Boolean);
+    const record={title,destination_country:document.getElementById('adminVacancyCountry').value.trim(),location:document.getElementById('adminVacancyLocation').value.trim()||null,employer_name:document.getElementById('adminVacancyEmployer').value.trim()||null,employment_type:document.getElementById('adminVacancyType').value.trim()||null,description:document.getElementById('adminVacancyDescription').value.trim(),requirements,is_published:document.getElementById('adminVacancyPublished').checked,closing_date:document.getElementById('adminVacancyClosing').value||null,created_by:currentUser.id};
+    const {error}=await supabaseClient.from('vacancies').insert(record);
+    if(error){msg.textContent='Could not save vacancy: '+error.message;return;}
+    msg.textContent='Vacancy saved successfully.';event.target.reset();await loadAdminDashboard();await loadVacancies();
+  });
+
   supabaseClient.auth.onAuthStateChange((event,session)=>{
     if(session?.user){setTimeout(()=>loadCandidateDashboard(session.user),0);}
     else{currentUser=null;document.getElementById('candidateDashboard').hidden=true;document.getElementById('authCard').hidden=false;}
