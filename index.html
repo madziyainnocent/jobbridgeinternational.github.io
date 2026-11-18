@@ -419,6 +419,7 @@
           const {data:urlData,error:urlError}=await supabaseClient.storage.from('candidate-documents').createSignedUrl(doc.storage_path,300);
           if(!urlError&&urlData?.signedUrl){const link=document.createElement('a');link.href=urlData.signedUrl;link.target='_blank';link.rel='noopener noreferrer';link.textContent='View / download';line.appendChild(link);}
           else{const unavailable=document.createElement('span');unavailable.className='portal-small';unavailable.textContent='Temporarily unavailable';line.appendChild(unavailable);}
+          documentPanel.appendChild(line);
         }
       }
       const controls=document.createElement('div');controls.className='admin-controls';
