@@ -19,8 +19,9 @@
     nav a:hover{color:var(--blue)}.facebook-nav{display:inline-flex;align-items:center;gap:7px;color:#1877f2;font-weight:800}.facebook-nav svg{width:19px;height:19px;display:block}.nav-cta,.btn{display:inline-flex;align-items:center;justify-content:center;border-radius:8px;padding:12px 19px;background:var(--blue);color:#fff;font-weight:700;border:1px solid var(--blue);transition:.2s}
     .nav-cta:hover,.btn:hover{background:var(--navy);border-color:var(--navy);transform:translateY(-1px)}
     .menu-btn{display:none;border:1px solid var(--line);background:#fff;border-radius:8px;padding:9px 12px;font-size:20px}
-    .hero{background:linear-gradient(115deg,#082b67 0%,#0b55b5 65%,#2b79ce 100%);color:#fff;overflow:hidden}
-    .hero-inner{min-height:560px;display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:48px;padding-top:70px;padding-bottom:70px}
+    .hero-banner{width:100%;background:#eaf3ff;overflow:hidden}
+    .hero-banner img{display:block;width:100%;height:auto;max-height:520px;object-fit:cover;object-position:center}
+    .hero-banner a{display:block}
     .eyebrow{font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:800;color:#bcd8ff}
     h1{font-size:clamp(40px,5.5vw,66px);line-height:1.06;letter-spacing:-1.8px;margin:16px 0 22px}
     .hero p{font-size:18px;color:#e5efff;max-width:620px;margin:0 0 30px}
@@ -51,17 +52,10 @@
   </div>
 </header>
 <main>
-  <section class="hero" id="home">
-    <div class="container hero-inner">
-      <div>
-        <div class="eyebrow">International recruitment • Global connections</div>
-        <h1>Connecting talent with global opportunities.</h1>
-        <p>JobBridge International helps connect candidates with employment opportunities beyond borders. We work to make the journey from application to international placement clear, organised and professional.</p>
-        <a class="btn" href="#opportunities">Explore opportunities</a>
-        <a class="btn secondary" href="#contact">Speak to our team</a>
-      </div>
-      <div class="hero-art" aria-hidden="true"><div class="orbit"></div><div class="globe">🌍</div><div class="art-note">Talent without borders</div></div>
-    </div>
+  <section class="hero-banner" id="home" aria-label="JobBridge International overseas recruitment banner">
+    <a href="#opportunities" aria-label="Explore JobBridge International opportunities">
+      <img src="/assets/jobbridge-banner.jpg" alt="JobBridge International — Overseas recruitment from Africa, connecting African talent with global employment opportunities in Lithuania" fetchpriority="high">
+    </a>
   </section>
   <section id="about">
     <div class="container about-grid">
