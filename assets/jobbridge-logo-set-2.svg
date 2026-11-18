@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 260" role="img" aria-labelledby="title desc">
+<title id="title">JobBridge International</title><desc id="desc">Blue globe with Africa, professional workforce silhouettes and an aircraft, with the tagline Connecting Talent with Global Opportunities.</desc>
+<defs><linearGradient id="blue" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1594ee"/><stop offset="1" stop-color="#062d78"/></linearGradient></defs>
+<g transform="translate(18 10)">
+<circle cx="112" cy="105" r="88" fill="none" stroke="url(#blue)" stroke-width="9"/>
+<ellipse cx="112" cy="105" rx="43" ry="88" fill="none" stroke="#167bd1" stroke-width="3"/>
+<path d="M29 105h166M43 62h138M43 148h138" fill="none" stroke="#167bd1" stroke-width="3"/>
+<path d="M83 34l24-8 17 12 15 2 8 16-9 13-2 17-15 8-9 20-15-5-11-22-16-8-4-23-13-8z" fill="#0752a5"/>
+<path d="M16 188c50 20 112 23 188-8-23 27-64 48-116 50-31 1-55-12-72-42z" fill="url(#blue)"/>
+<g fill="#082f78"><circle cx="87" cy="132" r="14"/><path d="M65 174v-16c0-17 10-25 22-25s22 8 22 25v16z"/><circle cx="131" cy="127" r="16"/><path d="M105 174v-18c0-19 12-29 26-29s26 10 26 29v18z"/><circle cx="174" cy="135" r="12"/><path d="M157 174v-14c0-14 8-22 17-22s17 8 17 22v14z"/></g>
+<path d="M155 34c73-30 135-27 194-8" fill="none" stroke="#168be0" stroke-width="5" stroke-linecap="round"/>
+<path d="M334 12l35 9-26 10 6 15-13-8-14 9 5-17-14-9z" fill="#082f78" transform="rotate(12 334 28)"/>
+</g>
+<g font-family="Arial,Helvetica,sans-serif" fill="#07377f">
+<text x="260" y="112" font-size="76" font-weight="800" letter-spacing="-2">JobBridge</text>
+<text x="265" y="165" font-size="48" font-weight="700" letter-spacing="8">INTERNATIONAL</text>
+<path d="M265 184H835" stroke="#0a4b9b" stroke-width="3"/>
+<text x="265" y="218" font-size="25" font-style="italic" font-weight="700">Connecting Talent with Global Opportunities</text>
+<text x="265" y="247" font-size="14" font-weight="700" letter-spacing="2">RECRUITMENT  |  JOB PLACEMENT  |  OVERSEAS EMPLOYMENT</text>
+</g></svg>
