@@ -118,7 +118,7 @@
       <div class="portal-card application-list"><h3>My applications</h3><div id="applicationsList"><p>Sign in to view your applications.</p></div></div>
 
     <div class="portal-dashboard" id="adminDashboard" hidden>
-      <div class="dashboard-heading"><div><div class="eyebrow">Recruitment administration</div><h3>Admin dashboard</h3><p>Manage vacancies and review candidate applications.</p></div><span class="status-pill">Staff access</span></div>
+      <div class="dashboard-heading"><div><div class="eyebrow">Recruitment administration</div><h3>Admin dashboard</h3><p>Manage vacancies and review candidate applications.</p><p class="portal-small" id="adminAccountEmail"></p></div><div><span class="status-pill">Staff access</span> <button class="btn btn-outline" id="adminSignOutBtn" type="button">Sign out</button></div></div>
       <div class="admin-stats" id="adminStats"><div class="admin-stat"><strong id="statApplications">—</strong><span>Total applications</span></div><div class="admin-stat"><strong id="statReview">—</strong><span>Under review</span></div><div class="admin-stat"><strong id="statVacancies">—</strong><span>Published vacancies</span></div><div class="admin-stat"><strong id="statCandidates">—</strong><span>Candidate accounts</span></div></div>
       <div class="portal-grid admin-grid">
         <div class="portal-card"><h3>Publish a vacancy</h3><form id="adminVacancyForm">
@@ -322,18 +322,33 @@
   });
   async function loadCandidateDashboard(user){
     currentUser=user;
-    document.getElementById('authCard').hidden=true;
-    const dash=document.getElementById('candidateDashboard');dash.hidden=false;
+    const authCard=document.getElementById('authCard');
+    const candidateDash=document.getElementById('candidateDashboard');
+    const adminDash=document.getElementById('adminDashboard');
+    candidateDash.hidden=true;
+    adminDash.hidden=true;
+    authCard.hidden=false;
+    authMessage.textContent='Checking your account permissions…';
+    const {data:profile,error:profileError}=await supabaseClient.from('profiles').select('id,full_name,phone,nationality,country_of_residence,role').eq('id',user.id).maybeSingle();
+    if(profileError){
+      authMessage.textContent='Signed in, but your profile could not be loaded: '+profileError.message+'. Please contact JobBridge support.';
+      return;
+    }
+    if(!profile){
+      authMessage.textContent='Signed in, but no profile record was found for this account. Please contact JobBridge support.';
+      return;
+    }
+    authCard.hidden=true;
     document.getElementById('candidateEmail').textContent=user.email||'';
-    const {data:profile}=await supabaseClient.from('profiles').select('*').eq('id',user.id).maybeSingle();
-    document.getElementById('welcomeName').textContent='Welcome, '+(profile?.full_name||user.user_metadata?.full_name||'Candidate');
-    document.getElementById('profileFullName').value=profile?.full_name||user.user_metadata?.full_name||'';
-    document.getElementById('profilePhone').value=profile?.phone||user.user_metadata?.phone||'';
-    document.getElementById('profileNationality').value=profile?.nationality||'';
-    document.getElementById('profileResidence').value=profile?.country_of_residence||'';
-    const isStaff=profile?.role==='admin'||profile?.role==='recruiter';
-    document.getElementById('candidateDashboard').hidden=isStaff;
-    document.getElementById('adminDashboard').hidden=!isStaff;
+    document.getElementById('adminAccountEmail').textContent=user.email||'';
+    document.getElementById('welcomeName').textContent='Welcome, '+(profile.full_name||user.user_metadata?.full_name||'Candidate');
+    document.getElementById('profileFullName').value=profile.full_name||user.user_metadata?.full_name||'';
+    document.getElementById('profilePhone').value=profile.phone||user.user_metadata?.phone||'';
+    document.getElementById('profileNationality').value=profile.nationality||'';
+    document.getElementById('profileResidence').value=profile.country_of_residence||'';
+    const isStaff=profile.role==='admin'||profile.role==='recruiter';
+    candidateDash.hidden=isStaff;
+    adminDash.hidden=!isStaff;
     if(isStaff){await loadAdminDashboard();}else{await loadVacancies();await loadApplications();}
   }
   async function loadVacancies(){
@@ -405,9 +420,17 @@
     if(!msg.textContent.startsWith('Application '+data.reference_code+' was received')) msg.textContent='Application received. Your reference is '+data.reference_code+'.';
     document.getElementById('coverNote').value='';document.getElementById('candidateFiles').value='';await loadApplications();
   });
-  document.getElementById('signOutBtn').addEventListener('click',async()=>{
-    await supabaseClient.auth.signOut();document.getElementById('candidateDashboard').hidden=true;document.getElementById('authCard').hidden=false;currentUser=null;
-  });
+  async function signOutOfPortal(){
+    const {error}=await supabaseClient.auth.signOut();
+    if(error){authMessage.textContent='Unable to sign out: '+error.message;return;}
+    currentUser=null;
+    document.getElementById('candidateDashboard').hidden=true;
+    document.getElementById('adminDashboard').hidden=true;
+    document.getElementById('authCard').hidden=false;
+    authMessage.textContent='You have signed out.';
+  }
+  document.getElementById('signOutBtn').addEventListener('click',signOutOfPortal);
+  document.getElementById('adminSignOutBtn').addEventListener('click',signOutOfPortal);
 
   const applicationStatuses=['received','under_review','shortlisted','interview_scheduled','selected','documentation','work_permit','placed','rejected','withdrawn'];
   async function loadAdminDashboard(){
