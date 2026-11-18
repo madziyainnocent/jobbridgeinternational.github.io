@@ -28,6 +28,9 @@
     .faq-list{display:grid;grid-template-columns:1fr 1fr;gap:16px}.faq{border:1px solid var(--line);border-radius:12px;padding:20px}.faq h3{margin:0 0 7px;color:var(--navy);font-size:17px}.faq p{margin:0;color:var(--muted);font-size:14px}
     .contact{background:var(--navy);color:#fff}.contact h2{color:#fff}.contact .lead{color:#d5e4fa}.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:42px}.contact-box{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:15px;padding:26px}.contact-row{margin:15px 0;color:#e6efff}.contact-row b{display:block;color:#fff;font-size:12px;text-transform:uppercase;letter-spacing:1px}.contact a:not(.btn){color:#fff;text-decoration:underline;text-underline-offset:3px}.contact .btn{background:#fff;color:var(--navy);border-color:#fff}
     footer{background:#061e49;color:#c6d7ef;padding:24px 0;font-size:13px}.footer-inner{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}.footer-facebook{display:inline-flex;align-items:center;gap:7px;color:#fff;font-weight:700}.footer-facebook svg{width:18px;height:18px;fill:#78b7ff}
+
+    .portal-section{background:#f5f9ff}.portal-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}.portal-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:25px;box-shadow:0 8px 25px rgba(8,43,103,.035)}.portal-card h3{color:var(--navy);margin:0 0 14px}.portal-card form{display:grid;gap:9px}.portal-card label{font-size:13px;font-weight:700;color:var(--navy);margin-top:5px}.portal-card input,.portal-card select,.portal-card textarea{width:100%;border:1px solid #cbd8e8;border-radius:7px;padding:12px;font:inherit;color:var(--ink);background:#fff}.portal-card .btn{margin-top:8px;cursor:pointer}.portal-tabs{display:flex;gap:8px;margin-bottom:18px;border-bottom:1px solid var(--line)}.portal-tab{border:0;background:transparent;padding:10px 14px;color:var(--muted);font-weight:700;cursor:pointer}.portal-tab.active{color:var(--blue);border-bottom:3px solid var(--blue)}.portal-message{font-size:13px;color:var(--blue);min-height:20px;margin:6px 0 0}.portal-info p,.portal-info li{color:var(--muted)}.portal-info ul{padding-left:20px}.portal-small{font-size:12px;color:var(--muted)}.portal-dashboard{margin-top:30px}.dashboard-heading{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:20px}.dashboard-heading h3{font-size:27px;color:var(--navy);margin:3px 0}.dashboard-heading p{margin:0;color:var(--muted)}.btn-outline{background:#fff;color:var(--navy);border-color:var(--line)}.application-list{margin-top:20px;overflow-x:auto}.application-row{padding:15px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}.application-row:last-child{border-bottom:0}.status-pill{display:inline-block;background:#e5f1ff;color:var(--navy);border-radius:20px;padding:4px 10px;font-size:12px;font-weight:700}.portal-section [hidden]{display:none!important}
+
     @media(max-width:900px){nav{gap:12px;font-size:12px}.nav-cta{display:none}.hero-grid{grid-template-columns:1fr  .7fr;gap:20px}.driver-details{grid-template-columns:1fr}.cards{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr 1fr}}
     @media(max-width:680px){.menu-btn{display:block}nav{display:none;position:absolute;top:81px;left:0;right:0;background:#fff;padding:18px 4%;border-bottom:1px solid var(--line);flex-direction:column;align-items:flex-start;gap:16px;font-size:14px}nav.open{display:flex}.hero{padding:64px 0}.hero-grid,.about-grid,.contact-grid{grid-template-columns:1fr}.hero-mark{min-height:240px}.globe{width:220px;font-size:72px}.orbit{width:270px;height:100px}.hero-note{right:0}.trust-grid{grid-template-columns:1fr;gap:10px}.trust-item{justify-content:flex-start}.cards,.steps,.faq-list{grid-template-columns:1fr}section{padding:60px 0}.footer-inner{flex-direction:column}
       nav .nav-group{display:block;width:100%}.nav-drop-toggle{width:100%;justify-content:space-between;padding:7px 0;font-size:14px}
@@ -35,6 +38,7 @@
       .dropdown a{white-space:normal;padding:9px 10px}
     }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 <header><div class="container nav">
@@ -43,7 +47,7 @@
   <nav id="mainNav">
     <a href="#home">Home</a>
     <div class="nav-group"><button class="nav-drop-toggle" type="button" aria-expanded="false">About Us <span aria-hidden="true">⌄</span></button><div class="dropdown"><a href="#about">Who We Are</a><a href="#about">Our Mission</a><a href="#contact">Meet Our Team</a></div></div>
-    <div class="nav-group"><button class="nav-drop-toggle" type="button" aria-expanded="false">Candidates <span aria-hidden="true">⌄</span></button><div class="dropdown"><a href="#opportunities">Find Jobs</a><a href="#opportunities">Apply for a Job</a><a href="#process">Application Process</a><a href="#faq">Candidate FAQs</a></div></div>
+    <div class="nav-group"><button class="nav-drop-toggle" type="button" aria-expanded="false">Candidates <span aria-hidden="true">⌄</span></button><div class="dropdown"><a href="#opportunities">Find Jobs</a><a href="#candidate-portal">Apply / Candidate Portal</a><a href="#process">Application Process</a><a href="#faq">Candidate FAQs</a></div></div>
     <div class="nav-group"><button class="nav-drop-toggle" type="button" aria-expanded="false">Employers <span aria-hidden="true">⌄</span></button><div class="dropdown"><a href="#employers">Recruitment Services</a><a href="mailto:placements@jobbridgeinternational.online?subject=Employer%20Vacancy%20Submission">Submit a Vacancy</a><a href="#contact">Contact Recruitment</a></div></div>
     <div class="nav-group"><button class="nav-drop-toggle" type="button" aria-expanded="false">Opportunities <span aria-hidden="true">⌄</span></button><div class="dropdown"><a href="#opportunities">Current Vacancies</a><a href="#opportunities">Truck Drivers – Lithuania</a></div></div>
     <div class="nav-group"><button class="nav-drop-toggle" type="button" aria-expanded="false">Resources <span aria-hidden="true">⌄</span></button><div class="dropdown"><a href="#process">Recruitment Process</a><a href="#faq">Frequently Asked Questions</a><a href="#contact">Contact & Support</a></div></div>
@@ -57,6 +61,48 @@
     <div class="hero-mark" aria-hidden="true"><div class="globe">🌍</div><div class="orbit"></div><div class="hero-note">Connecting talent across borders</div></div>
   </div></section>
   <div class="trust"><div class="container trust-grid"><div class="trust-item"><span class="trust-icon">◎</span> International recruitment focus</div><div class="trust-item"><span class="trust-icon">✓</span> Clear candidate guidance</div><div class="trust-item"><span class="trust-icon">✈</span> Placement coordination</div></div></div>
+
+  <section class="portal-section" id="candidate-portal"><div class="container">
+    <div class="section-head"><div class="eyebrow">Candidate portal</div><h2>Your applications, in one place.</h2><p class="lead">Create an account or sign in to manage your candidate profile and follow your applications.</p></div>
+    <div class="portal-grid">
+      <div class="portal-card" id="authCard">
+        <div class="portal-tabs"><button type="button" class="portal-tab active" id="loginTab">Sign in</button><button type="button" class="portal-tab" id="signupTab">Create account</button></div>
+        <form id="authForm">
+          <label for="authName" id="nameLabel" hidden>Full name</label><input id="authName" autocomplete="name" placeholder="Full name" hidden>
+          <label for="authPhone" id="phoneLabel" hidden>Phone number</label><input id="authPhone" autocomplete="tel" placeholder="Phone number (include country code)" hidden>
+          <label for="authEmail">Email address</label><input id="authEmail" type="email" autocomplete="email" placeholder="you@example.com" required>
+          <label for="authPassword">Password</label><input id="authPassword" type="password" autocomplete="current-password" minlength="8" placeholder="At least 8 characters" required>
+          <button class="btn" id="authSubmit" type="submit">Sign in</button>
+          <p class="portal-message" id="authMessage" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+      <div class="portal-card portal-info">
+        <div class="card-icon">🔐</div><h3>Secure candidate access</h3>
+        <p>Your account gives you a private place to manage your details and view recruitment progress. Keep your login details confidential.</p>
+        <ul><li>Register with your own email address.</li><li>Verify your email before signing in.</li><li>Use your dashboard to check application references and updates.</li></ul>
+        <p class="portal-small">Never send passwords or passport details through public chat.</p>
+      </div>
+    </div>
+    <div class="portal-dashboard" id="candidateDashboard" hidden>
+      <div class="dashboard-heading"><div><div class="eyebrow">My account</div><h3 id="welcomeName">Welcome</h3><p id="candidateEmail"></p></div><button class="btn btn-outline" id="signOutBtn" type="button">Sign out</button></div>
+      <div class="portal-grid">
+        <div class="portal-card"><h3>My candidate profile</h3><form id="profileForm">
+          <label for="profileFullName">Full name</label><input id="profileFullName" required>
+          <label for="profilePhone">Phone number</label><input id="profilePhone" placeholder="+263...">
+          <label for="profileNationality">Nationality</label><input id="profileNationality">
+          <label for="profileResidence">Country of residence</label><input id="profileResidence">
+          <button class="btn" type="submit">Save profile</button><p class="portal-message" id="profileMessage" role="status"></p>
+        </form></div>
+        <div class="portal-card"><h3>Apply for a vacancy</h3><form id="applicationForm">
+          <label for="vacancySelect">Published vacancy</label><select id="vacancySelect" required><option value="">Loading vacancies…</option></select>
+          <label for="coverNote">Brief introduction (optional)</label><textarea id="coverNote" rows="4" placeholder="Tell us briefly about your relevant experience"></textarea>
+          <button class="btn" type="submit">Submit application</button><p class="portal-message" id="applicationMessage" role="status"></p>
+        </form><p class="portal-small">Only submit accurate information. Selection and placement are not guaranteed.</p></div>
+      </div>
+      <div class="portal-card application-list"><h3>My applications</h3><div id="applicationsList"><p>Sign in to view your applications.</p></div></div>
+    </div>
+  </div></section>
+
   <section id="about"><div class="container about-grid">
     <div><div class="section-head"><div class="eyebrow">Who we are</div><h2>Your bridge to international employment.</h2><p class="lead">JobBridge International is an overseas recruitment company focused on connecting talent from Africa with opportunities in international markets.</p></div><p>We believe candidates deserve clear information, respectful communication and a recruitment process they can understand. We support applicants with opportunity information, application guidance and placement coordination.</p></div>
     <div class="about-panel"><strong>Our commitment</strong><div class="feature-list">
@@ -69,7 +115,7 @@
     <div class="section-head"><div class="eyebrow">For candidates</div><h2>Take the next step in your career.</h2><p class="lead">Find out about vacancies, understand eligibility requirements and get guidance on the application process.</p></div>
     <div class="cards">
       <article class="card"><div class="card-icon">⌕</div><h3>Explore vacancies</h3><p>Review current opportunities and check the experience, qualifications and documents required for each role.</p><a class="text-link" href="#opportunities">View opportunities</a></article>
-      <article class="card"><div class="card-icon">▤</div><h3>Prepare your application</h3><p>Get your CV and relevant supporting information ready before applying for a position.</p><a class="text-link" href="mailto:placements@jobbridgeinternational.online?subject=Candidate%20Application%20Enquiry">Ask about applying</a></article>
+      <article class="card"><div class="card-icon">▤</div><h3>Prepare your application</h3><p>Get your CV and relevant supporting information ready before applying for a position.</p><a class="text-link" href="#candidate-portal">Register and apply online</a></article>
       <article class="card"><div class="card-icon">✓</div><h3>Understand the process</h3><p>Know what to expect as your application is reviewed and shortlisted candidates progress.</p><a class="text-link" href="#process">See how it works</a></article>
     </div>
   </div></section>
@@ -84,7 +130,7 @@
       <div class="driver-details"><div><b>Who can apply</b><ul><li>African nationals willing to migrate and work in Lithuania.</li><li>Applicants with a valid heavy-vehicle driving licence appropriate to the role.</li><li>Truck-driving experience and a responsible approach to road safety.</li><li>Applicants willing to complete the required recruitment, documentation and assessment process.</li></ul></div>
       <div class="migration-note"><b>Migration cost support</b><p>For candidates selected for placement, the company will cater for migration-associated costs. The covered items, arrangements and timing will be explained to selected candidates before they make a commitment.</p></div></div>
       <p class="driver-disclaimer">Submitting an application does not guarantee selection, a job offer, a visa or migration approval. All placements and immigration processes are subject to the relevant employer and government requirements.</p>
-      <div class="driver-actions"><a class="btn" href="mailto:placements@jobbridgeinternational.online?subject=Truck%20Driver%20Application%20-%20Lithuania">Apply for this opportunity</a><a class="text-link" href="mailto:placements@jobbridgeinternational.online?subject=Truck%20Driver%20Enquiry%20-%20Lithuania">Ask a question</a></div>
+      <div class="driver-actions"><a class="btn" href="#candidate-portal">Apply through candidate portal</a><a class="text-link" href="mailto:placements@jobbridgeinternational.online?subject=Truck%20Driver%20Enquiry%20-%20Lithuania">Ask a question</a></div>
     </article>
   </div></section>
   <section class="process" id="process"><div class="container">
@@ -130,6 +176,110 @@
   }));
   document.addEventListener('click',event=>{if(!nav.contains(event.target)){nav.querySelectorAll('.nav-group').forEach(group=>{group.classList.remove('expanded');const button=group.querySelector('.nav-drop-toggle');if(button)button.setAttribute('aria-expanded','false');});}});
   document.getElementById('year').textContent=new Date().getFullYear();
+
+  // Supabase browser client: publishable key is intended for public browser use.
+  const SUPABASE_URL = 'https://pdtpkhxxsuiyoxsnbslc.supabase.co';
+  const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_yyZicC9VrVuDOaWcCvRINA_WDAs6MiE';
+  const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+  const authForm=document.getElementById('authForm'), authName=document.getElementById('authName'), authPhone=document.getElementById('authPhone');
+  const authMessage=document.getElementById('authMessage'), authSubmit=document.getElementById('authSubmit');
+  let authMode='login', currentUser=null;
+  function setAuthMode(mode){
+    authMode=mode;const signup=mode==='signup';
+    document.getElementById('loginTab').classList.toggle('active',!signup);
+    document.getElementById('signupTab').classList.toggle('active',signup);
+    authName.hidden=!signup;authPhone.hidden=!signup;
+    document.getElementById('nameLabel').hidden=!signup;document.getElementById('phoneLabel').hidden=!signup;
+    authName.required=signup;authSubmit.textContent=signup?'Create account':'Sign in';
+    document.getElementById('authPassword').autocomplete=signup?'new-password':'current-password';
+    authMessage.textContent='';
+  }
+  document.getElementById('loginTab').addEventListener('click',()=>setAuthMode('login'));
+  document.getElementById('signupTab').addEventListener('click',()=>setAuthMode('signup'));
+  authForm.addEventListener('submit',async event=>{
+    event.preventDefault();authSubmit.disabled=true;authMessage.textContent='Please wait…';
+    const email=document.getElementById('authEmail').value.trim();
+    const password=document.getElementById('authPassword').value;
+    try{
+      if(authMode==='signup'){
+        const {data,error}=await supabaseClient.auth.signUp({
+          email,password,options:{
+            emailRedirectTo:'https://jobbridgeinternational.online/',
+            data:{full_name:authName.value.trim(),phone:authPhone.value.trim()}
+          }
+        });
+        if(error)throw error;
+        authMessage.textContent=data.session?'Account created. You are signed in.':'Account created. Check your email and click the verification link before signing in.';
+      }else{
+        const {error}=await supabaseClient.auth.signInWithPassword({email,password});
+        if(error)throw error;
+        authMessage.textContent='Signed in successfully.';
+      }
+    }catch(error){authMessage.textContent=error.message||'Unable to complete authentication.';}
+    finally{authSubmit.disabled=false;}
+  });
+  async function loadCandidateDashboard(user){
+    currentUser=user;
+    document.getElementById('authCard').hidden=true;
+    const dash=document.getElementById('candidateDashboard');dash.hidden=false;
+    document.getElementById('candidateEmail').textContent=user.email||'';
+    const {data:profile}=await supabaseClient.from('profiles').select('*').eq('id',user.id).maybeSingle();
+    document.getElementById('welcomeName').textContent='Welcome, '+(profile?.full_name||user.user_metadata?.full_name||'Candidate');
+    document.getElementById('profileFullName').value=profile?.full_name||user.user_metadata?.full_name||'';
+    document.getElementById('profilePhone').value=profile?.phone||user.user_metadata?.phone||'';
+    document.getElementById('profileNationality').value=profile?.nationality||'';
+    document.getElementById('profileResidence').value=profile?.country_of_residence||'';
+    await loadVacancies();await loadApplications();
+  }
+  async function loadVacancies(){
+    const select=document.getElementById('vacancySelect');
+    const {data,error}=await supabaseClient.from('vacancies').select('id,title,destination_country').eq('is_published',true).order('created_at',{ascending:false});
+    if(error){select.innerHTML='<option value="">Unable to load vacancies</option>';return;}
+    select.innerHTML='<option value="">Select a vacancy</option>';
+    (data||[]).forEach(v=>{const option=document.createElement('option');option.value=v.id;option.textContent=v.title+(v.destination_country?' — '+v.destination_country:'');select.appendChild(option);});
+    if(!data?.length)select.innerHTML='<option value="">No published vacancies yet</option>';
+  }
+  async function loadApplications(){
+    const host=document.getElementById('applicationsList');
+    const {data,error}=await supabaseClient.from('applications').select('id,reference_code,status,submitted_at,vacancies(title,destination_country)').order('submitted_at',{ascending:false});
+    if(error){host.textContent='Could not load applications: '+error.message;return;}
+    if(!data?.length){host.innerHTML='<p>You have not submitted any applications yet.</p>';return;}
+    host.replaceChildren();
+    data.forEach(app=>{
+      const row=document.createElement('div');row.className='application-row';
+      const details=document.createElement('div');const title=document.createElement('strong');
+      title.textContent=app.vacancies?.title||'Vacancy application';
+      const ref=document.createElement('div');ref.className='portal-small';ref.textContent='Reference: '+app.reference_code;
+      details.append(title,ref);
+      const status=document.createElement('span');status.className='status-pill';status.textContent=app.status.replaceAll('_',' ');
+      row.append(details,status);host.appendChild(row);
+    });
+  }
+  document.getElementById('profileForm').addEventListener('submit',async event=>{
+    event.preventDefault();const msg=document.getElementById('profileMessage');msg.textContent='Saving…';
+    const values={full_name:document.getElementById('profileFullName').value.trim(),phone:document.getElementById('profilePhone').value.trim(),nationality:document.getElementById('profileNationality').value.trim(),country_of_residence:document.getElementById('profileResidence').value.trim(),updated_at:new Date().toISOString()};
+    const {error}=await supabaseClient.from('profiles').update(values).eq('id',currentUser.id);
+    msg.textContent=error?'Could not save profile: '+error.message:'Profile saved.';
+    if(!error)document.getElementById('welcomeName').textContent='Welcome, '+values.full_name;
+  });
+  document.getElementById('applicationForm').addEventListener('submit',async event=>{
+    event.preventDefault();const msg=document.getElementById('applicationMessage');const vacancyId=document.getElementById('vacancySelect').value;
+    if(!vacancyId){msg.textContent='Please select a published vacancy.';return;}
+    msg.textContent='Submitting…';
+    const {data,error}=await supabaseClient.from('applications').insert({candidate_id:currentUser.id,vacancy_id:vacancyId,cover_note:document.getElementById('coverNote').value.trim()}).select('reference_code').single();
+    if(error){msg.textContent=error.code==='23505'?'You have already applied for this vacancy.':'Application could not be submitted: '+error.message;return;}
+    msg.textContent='Application received. Your reference is '+data.reference_code+'.';
+    document.getElementById('coverNote').value='';await loadApplications();
+  });
+  document.getElementById('signOutBtn').addEventListener('click',async()=>{
+    await supabaseClient.auth.signOut();document.getElementById('candidateDashboard').hidden=true;document.getElementById('authCard').hidden=false;currentUser=null;
+  });
+  supabaseClient.auth.onAuthStateChange((event,session)=>{
+    if(session?.user){setTimeout(()=>loadCandidateDashboard(session.user),0);}
+    else{currentUser=null;document.getElementById('candidateDashboard').hidden=true;document.getElementById('authCard').hidden=false;}
+  });
+  supabaseClient.auth.getSession().then(({data})=>{if(data.session?.user)loadCandidateDashboard(data.session.user);});
+
 </script>
 </body>
 </html>
