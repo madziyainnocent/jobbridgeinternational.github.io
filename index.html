@@ -99,6 +99,8 @@
         <div class="portal-card"><h3>Apply for a vacancy</h3><form id="applicationForm">
           <label for="vacancySelect">Published vacancy</label><select id="vacancySelect" required><option value="">Loading vacancies…</option></select>
           <label for="coverNote">Brief introduction (optional)</label><textarea id="coverNote" rows="4" placeholder="Tell us briefly about your relevant experience"></textarea>
+          <label for="candidateFiles">Upload CV and supporting documents</label><input id="candidateFiles" type="file" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
+          <p class="portal-small">PDF, DOC, DOCX, JPG or PNG. Maximum 10 MB per file. Upload only documents relevant to this application.</p>
           <button class="btn" type="submit">Submit application</button><p class="portal-message" id="applicationMessage" role="status"></p>
         </form><p class="portal-small">Only submit accurate information. Selection and placement are not guaranteed.</p></div>
       </div>
@@ -279,6 +281,10 @@
       details.append(title,ref);
       const status=document.createElement('span');status.className='status-pill';status.textContent=app.status.replaceAll('_',' ');
       row.append(details,status);host.appendChild(row);
+      const events=await supabaseClient.from('application_events').select('new_status,note,created_at').eq('application_id',app.id).eq('visible_to_candidate',true).order('created_at',{ascending:true});
+      if(events.data?.length){const timeline=document.createElement('div');timeline.className='portal-small';timeline.textContent='Updates: '+events.data.map(e=>e.new_status.replaceAll('_',' ')+(e.note?' — '+e.note:'')).join(' · ');host.appendChild(timeline);}
+      const docs=await supabaseClient.from('candidate_documents').select('original_filename,uploaded_at').eq('application_id',app.id).order('uploaded_at',{ascending:false});
+      if(docs.data?.length){const uploaded=document.createElement('div');uploaded.className='portal-small';uploaded.textContent='Documents submitted: '+docs.data.map(d=>d.original_filename).join(', ');host.appendChild(uploaded);}
     });
   }
   document.getElementById('profileForm').addEventListener('submit',async event=>{
@@ -292,10 +298,21 @@
     event.preventDefault();const msg=document.getElementById('applicationMessage');const vacancyId=document.getElementById('vacancySelect').value;
     if(!vacancyId){msg.textContent='Please select a published vacancy.';return;}
     msg.textContent='Submitting…';
-    const {data,error}=await supabaseClient.from('applications').insert({candidate_id:currentUser.id,vacancy_id:vacancyId,cover_note:document.getElementById('coverNote').value.trim()}).select('reference_code').single();
+    const {data,error}=await supabaseClient.from('applications').insert({candidate_id:currentUser.id,vacancy_id:vacancyId,cover_note:document.getElementById('coverNote').value.trim()}).select('id,reference_code').single();
     if(error){msg.textContent=error.code==='23505'?'You have already applied for this vacancy.':'Application could not be submitted: '+error.message;return;}
-    msg.textContent='Application received. Your reference is '+data.reference_code+'.';
-    document.getElementById('coverNote').value='';await loadApplications();
+    const files=Array.from(document.getElementById('candidateFiles').files||[]);
+    const allowed=['application/pdf','application/msword','application/vnd.openxmlformats-officedocument.wordprocessingml.document','image/jpeg','image/png'];
+    for(const file of files){
+      if(file.size>10*1024*1024||!allowed.includes(file.type)){msg.textContent='Application '+data.reference_code+' was received, but '+file.name+' was skipped. Use PDF, DOC, DOCX, JPG or PNG up to 10 MB.';continue;}
+      const safeName=file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
+      const path=currentUser.id+'/'+data.id+'/'+Date.now()+'-'+safeName;
+      const {error:uploadError}=await supabaseClient.storage.from('candidate-documents').upload(path,file,{upsert:false});
+      if(uploadError){msg.textContent='Application '+data.reference_code+' was received, but a document upload failed: '+uploadError.message;continue;}
+      const {error:metaError}=await supabaseClient.from('candidate_documents').insert({application_id:data.id,candidate_id:currentUser.id,storage_path:path,document_type:file.name.toLowerCase().includes('cv')?'CV':'Supporting document',original_filename:file.name});
+      if(metaError){msg.textContent='Application received, but document record could not be saved. Contact placements team with reference '+data.reference_code+'.';}
+    }
+    if(!msg.textContent.startsWith('Application '+data.reference_code+' was received')) msg.textContent='Application received. Your reference is '+data.reference_code+'.';
+    document.getElementById('coverNote').value='';document.getElementById('candidateFiles').value='';await loadApplications();
   });
   document.getElementById('signOutBtn').addEventListener('click',async()=>{
     await supabaseClient.auth.signOut();document.getElementById('candidateDashboard').hidden=true;document.getElementById('authCard').hidden=false;currentUser=null;
